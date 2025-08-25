@@ -3,15 +3,28 @@ import CategoryGrid from '../components/CategoryGrid/CategoryGrid'
 import ProductList from '../components/ProductList/ProductList'
 import { categories } from '../data/categories'
 
-export default function Home({ cartCount, onAddToCart, products }) {
+export default function Home({
+  products,
+  cart,
+  totalItems,
+  onAddToCart,
+  onRemoveFromCart,
+  onClearCart,
+}) {
   return (
     <>
-      <Navbar cartCount={cartCount} />
+      <Navbar cartCount={totalItems} onClearCart={onClearCart} />
       <main style={{ padding: 16 }}>
         <h2>Shop by Category</h2>
         <CategoryGrid categories={categories} />
+
         <h2 style={{ marginTop: 24 }}>Popular products</h2>
-        <ProductList products={products} onAdd={onAddToCart} />
+        <ProductList
+          products={products}
+          cart={cart}
+          onAdd={onAddToCart}
+          onRemove={onRemoveFromCart}
+        />
       </main>
     </>
   )
