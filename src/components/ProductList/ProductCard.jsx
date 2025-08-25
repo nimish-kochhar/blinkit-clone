@@ -1,4 +1,4 @@
-export default function ProductCard({ id, name, price, image, onAdd }) {
+export default function ProductCard({ id, name, price, image, quantity = 0, onAdd, onRemove }) {
   return (
     <div className="product-card">
       <img src={image} alt={name} />
@@ -6,7 +6,16 @@ export default function ProductCard({ id, name, price, image, onAdd }) {
         <h4>{name}</h4>
         <p>₹{price}</p>
       </div>
-      <button className="add-btn" onClick={() => onAdd(id)}>Add</button>
+
+      {quantity > 0 ? (
+        <div className="qty-controls">
+          <button onClick={() => onRemove(id)}>-</button>
+          <span>{quantity}</span>
+          <button onClick={() => onAdd(id)}>+</button>
+        </div>
+      ) : (
+        <button className="add-btn" onClick={() => onAdd(id)}>Add</button>
+      )}
     </div>
   )
 }

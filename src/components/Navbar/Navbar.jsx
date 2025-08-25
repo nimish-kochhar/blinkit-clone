@@ -1,6 +1,6 @@
 import './Navbar.css'
 
-export default function Navbar({ cartCount = 0 }) {
+export default function Navbar({ cartCount = 0, onClearCart }) {
   return (
     <header className="navbar">
       <div className="brand">Blinkit</div>
@@ -15,6 +15,11 @@ export default function Navbar({ cartCount = 0 }) {
       <div className="actions">
         <button className="login">Sign In</button>
         <button className="cart">Cart ({cartCount})</button>
+        {cartCount > 0 && (
+          <button className="clear" onClick={onClearCart}>
+            Clear
+          </button>
+        )}
       </div>
     </header>
   )

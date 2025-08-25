@@ -53,3 +53,9 @@
   color: white;
   border: none;
 }
+
+.actions .clear {
+  background: #ffe8e8;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
