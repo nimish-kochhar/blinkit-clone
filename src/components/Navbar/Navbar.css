@@ -1,0 +1,55 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 140px 220px 1fr 220px;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+.brand {
+  font-weight: 800;
+  color: #00c853;
+  font-size: 22px;
+}
+
+.location span {
+  display: block;
+  font-size: 12px;
+  color: #666;
+}
+
+.location strong {
+  font-size: 14px;
+}
+
+.search {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-self: end;
+}
+
+.actions button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.actions .cart {
+  background: #00c853;
+  color: white;
+  border: none;
+}
