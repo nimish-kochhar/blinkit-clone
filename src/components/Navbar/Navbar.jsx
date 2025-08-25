@@ -1,6 +1,6 @@
 import './Navbar.css'
 
-export default function Navbar() {
+export default function Navbar({ cartCount = 0 }) {
   return (
     <header className="navbar">
       <div className="brand">Blinkit</div>
@@ -14,7 +14,7 @@ export default function Navbar() {
 
       <div className="actions">
         <button className="login">Sign In</button>
-        <button className="cart">Cart (0)</button>
+        <button className="cart">Cart ({cartCount})</button>
       </div>
     </header>
   )
