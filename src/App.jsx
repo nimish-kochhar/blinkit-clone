@@ -1,15 +1,48 @@
-import { useState } from 'react'
-import Home from './Pages/Home'
+import { useState, useMemo } from 'react'
+import Home from './pages/Home'
 import { products } from './data/products'
 
 function App() {
-  const [cartCount, setCartCount] = useState(0)
+  // cart: { [productId]: quantity }
+  const [cart, setCart] = useState({})
+
+  const totalItems = useMemo(
+    () => Object.values(cart).reduce((sum, qty) => sum + qty, 0),
+    [cart]
+  )
 
   function handleAddToCart(id) {
-    setCartCount((c) => c + 1)
+    setCart(prev => ({
+      ...prev,
+      [id]: (prev[id] ?? 0) + 1,
+    }))
   }
 
-  return <Home cartCount={cartCount} onAddToCart={handleAddToCart} products={products} />
+  function handleRemoveFromCart(id) {
+    setCart(prev => {
+      const current = prev[id] ?? 0
+      if (current <= 1) {
+        const { [id]: _, ...rest } = prev
+        return rest
+      }
+      return { ...prev, [id]: current - 1 }
+    })
+  }
+
+  function clearCart() {
+    setCart({})
+  }
+
+  return (
+    <Home
+      products={products}
+      cart={cart}
+      totalItems={totalItems}
+      onAddToCart={handleAddToCart}
+      onRemoveFromCart={handleRemoveFromCart}
+      onClearCart={clearCart}
+    />
+  )
 }
 
 export default App
