@@ -13,7 +13,13 @@ export default function Home({
 }) {
   return (
     <>
-      <Navbar cartCount={totalItems} onClearCart={onClearCart} />
+      <Navbar
+        cartCount={totalItems}
+        onClearCart={onClearCart}
+        cart={cart}
+        onAddToCart={onAddToCart}
+        onRemoveFromCart={onRemoveFromCart}
+      />
       <main style={{ padding: 16 }}>
         <h2>Shop by Category</h2>
         <CategoryGrid categories={categories} />
