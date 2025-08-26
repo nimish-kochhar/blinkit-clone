@@ -1,7 +1,10 @@
 import ProductCard from './ProductCard'
 import './ProductList.css'
+import { useCart } from '../../context/CartContext'
 
-export default function ProductList({ products, cart, onAdd, onRemove }) {
+export default function ProductList({ products }) {
+  const { cart, addToCart, removeFromCart } = useCart()
+
   return (
     <div className="product-list">
       {products.map(p => (
@@ -12,8 +15,8 @@ export default function ProductList({ products, cart, onAdd, onRemove }) {
           price={p.price}
           image={p.image}
           quantity={cart[p.id] ?? 0}
-          onAdd={onAdd}
-          onRemove={onRemove}
+          onAdd={addToCart}
+          onRemove={removeFromCart}
         />
       ))}
     </div>

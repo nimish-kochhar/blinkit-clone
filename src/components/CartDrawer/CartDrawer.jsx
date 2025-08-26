@@ -1,6 +1,9 @@
+import { useCart } from '../../context/CartContext'
 import './CartDrawer.css'
 
-export default function CartDrawer({ cart, onClose, onAdd, onRemove }) {
+export default function CartDrawer({ onClose }) {
+  const { cart, addToCart, removeFromCart } = useCart()
+
   const subtotal = Object.entries(cart).reduce(
     (sum, [id, qty]) => sum + (getProductPrice(id) * qty),
     0
@@ -8,7 +11,6 @@ export default function CartDrawer({ cart, onClose, onAdd, onRemove }) {
 
   // Mock price lookup; in reality, fetch from products or API
   function getProductPrice(id) {
-    // Replace with actual product data lookup
     const prices = {
       'milk-500': 32,
       'bread': 45,
@@ -33,9 +35,9 @@ export default function CartDrawer({ cart, onClose, onAdd, onRemove }) {
                 <li key={id} className="item">
                   <span className="name">{id} (₹{getProductPrice(id)})</span>
                   <div className="controls">
-                    <button onClick={() => onRemove(id)}>-</button>
+                    <button onClick={() => removeFromCart(id)}>-</button>
                     <span>{qty}</span>
-                    <button onClick={() => onAdd(id)}>+</button>
+                    <button onClick={() => addToCart(id)}>+</button>
                   </div>
                   <span className="line-total">₹{getProductPrice(id) * qty}</span>
                 </li>

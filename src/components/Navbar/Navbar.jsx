@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import CartDrawer from '../CartDrawer/CartDrawer' // We'll create this next
+import { useCart } from '../../context/CartContext'
+import CartDrawer from '../CartDrawer/CartDrawer'
 import './Navbar.css'
 
-export default function Navbar({ cartCount = 0, onClearCart, cart, onAddToCart, onRemoveFromCart }) {
+export default function Navbar() {
+  const { totalItems, clearCart, cart, addToCart, removeFromCart } = useCart()
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   return (
@@ -20,10 +22,10 @@ export default function Navbar({ cartCount = 0, onClearCart, cart, onAddToCart, 
         <div className="actions">
           <button className="login">Sign In</button>
           <button className="cart" onClick={() => setIsDrawerOpen(true)}>
-            Cart ({cartCount})
+            Cart ({totalItems})
           </button>
-          {cartCount > 0 && (
-            <button className="clear" onClick={onClearCart}>
+          {totalItems > 0 && (
+            <button className="clear" onClick={clearCart}>
               Clear
             </button>
           )}
@@ -32,10 +34,7 @@ export default function Navbar({ cartCount = 0, onClearCart, cart, onAddToCart, 
 
       {isDrawerOpen && (
         <CartDrawer
-          cart={cart}
           onClose={() => setIsDrawerOpen(false)}
-          onAdd={onAddToCart}
-          onRemove={onRemoveFromCart}
         />
       )}
     </>
