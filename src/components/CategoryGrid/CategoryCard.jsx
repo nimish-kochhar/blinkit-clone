@@ -1,10 +1,11 @@
-// CategoryCard shows a category image and name
-export default function CategoryCard({ name, image }) {
-  // props 'name' and 'image' come from parent component
+import { Link } from 'react-router-dom'
+
+export default function CategoryCard({ id = '', name, image }) {
+  // Defensive: id defaults to empty string to avoid toLowerCase error
   return (
-    <div className="category-card">
+    <Link to={`/category/${id.toLowerCase()}`} className="category-card">
       <img src={image} alt={name} />
       <span>{name}</span>
-    </div>
+    </Link>
   )
 }

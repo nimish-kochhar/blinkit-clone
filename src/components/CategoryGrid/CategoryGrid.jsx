@@ -2,12 +2,17 @@ import CategoryCard from './CategoryCard'
 import './CategoryGrid.css'
 
 export default function CategoryGrid({ categories }) {
-  // categories prop is an array of category objects
+  if (!categories) {
+    return <p>No categories to display</p>
+  }
+
   return (
     <div className="category-grid">
-      {categories.map((cat) => (
-        <CategoryCard key={cat.id} name={cat.name} image={cat.image} />
-      ))}
+      {categories
+        .filter(cat => cat && cat.id) // Ignore invalid entries missing id
+        .map((cat) => (
+          <CategoryCard key={cat.id} id={cat.id} name={cat.name} image={cat.image} />
+        ))}
     </div>
   )
 }
